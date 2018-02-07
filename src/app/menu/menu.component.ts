@@ -43,9 +43,8 @@ import { DishdetailComponent } from '../dishdetail/dishdetail.component';
  
 
 export class MenuComponent implements OnInit {
-
+ lipstick = "lipstick";
   dishes = DISHES;
-
   selectedDish = DISHES[0];
 
   constructor() { }

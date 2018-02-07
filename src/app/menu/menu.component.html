@@ -1,20 +1,29 @@
-<!--
 <div class="container"
      fxLayout="column"
      fxLayoutGap="10px">
 
-<md-list fxFlex>
-  <md-list-item *ngFor="let dish of dishes">
-    <img md-list-avatar src={{dish.image}} alt={{dish.name}}>
-    <h1 md-line> {{dish.name}} </h1>
-    <p md-line>
-      <span> {{dish.description}} </span>
-    </p>
-  </md-list-item>
-</md-list>
+  <div fxFlex>
+    <div>
+      <h3>Menu</h3>
+      <hr>
+    </div>
+  </div>
 
+  <div fxFlex>
+    <md-grid-list cols="2" rowHeight="200px">
+      <md-grid-tile *ngFor="let dish of dishes" (click) = "onSelect(dish)">
+        <img height="200px" src={{dish.image}} alt={{dish.name}}>
+        <md-grid-tile-footer>
+          <h1 md-line>{{dish.name | uppercase}}</h1>
+        </md-grid-tile-footer>
+      </md-grid-tile>
+    </md-grid-list>
+  </div>
+  <app-dishdetail [dish] = "selectedDish"></app-dishdetail>
 </div>
--->
+
+<!--
+<p>Lipstick value is: {{lipstick}}</p>
 <div class="container"
      fxLayout="column"
      fxLayoutGap="10px">
@@ -47,12 +56,12 @@
         <p>{{dish.description}}
         </p>
       </md-card-content>
+ <app-dishdetail></app-dishdetail>
       <md-card-actions>
         <button md-button>LIKE</button>
         <button md-button>SHARE</button>
       </md-card-actions>
-    </md-card>
-
+      </md-card>
   </div>
-<app-dishdetail></app-dishdetail>
 </div>
+-->
