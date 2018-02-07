@@ -19,7 +19,7 @@ import { DishdetailComponent } from './dishdetail/dishdetail.component';
   ],
   imports: [
     BrowserModule,
-     BrowserAnimationsModule,
+    BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule
   ],
