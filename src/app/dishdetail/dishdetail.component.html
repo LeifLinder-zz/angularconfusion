@@ -8,15 +8,15 @@
     fxLayoutGap.xs="0">
 
   <div fxFlex="40">
-    <md-card *ngIf="dish2">
+    <md-card *ngIf="dish">
       <md-card-header>
         <md-card-title>
-          <h3>{{dish2.name | uppercase}}</h3>
+          <h3>{{dish.name | uppercase}}</h3>
         </md-card-title>
       </md-card-header>
       <img md-card-image src={{dish.image}} alt={{dish.name}}>
       <md-card-content>
-        <p>{{dish2.description}}
+        <p>{{dish.description}}
         </p>
       </md-card-content>
       <md-card-actions>
@@ -27,12 +27,12 @@
   </div>
 
 
-  <div fxFlex="40" *ngIf="dish2">
-    <div *ngIf="dish2">
+  <div fxFlex="40" *ngIf="dish">
+    <div *ngIf="dish">
       <h3>Dish Comments</h3>
     </div>
     <br>
-       <md-list *ngFor="let comment of dish2.comments">
+       <md-list *ngFor="let comment of dish.comments">
          <md-list-item>
             {{comment.comment}}
          </md-list-item>
@@ -44,38 +44,6 @@
          </md-list-item>
         </md-list>
       <br>  
-    <!--
-          <mat-list>
-          <mat-list-item *ngFor="let comment of dish2.comments">
-            <h3>Comments</h3>
-            <h3 matLine> {{comment.comment}} </h3>
-            <p matLine> {{comment.comment}} </p>
-            <p matLine class="demo-2"> {{comment.comment}} </p>
-          </mat-list-item>
-        </mat-list>
-      -->
   </div>
 
 </div>
-
-<!--
-
-
-<div class="container"
-    fxLayout="row"
-    fxLayout.sm="column"
-    fxLayout.xs="column"
-    fxLayoutAlign.gt-md="space-around center"
-    fxLayoutGap="10px" 
-    fxLayoutGap.xs="0">
-
-  <div fxFlex="40">
-    <p>Display the details of the Dish here {{lipstick}} </p>
-  </div>
-
-  <div fxFlex="40">
-    <p>Display the list of comments here </p>
-  </div>
-
-</div>
--->
