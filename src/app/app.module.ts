@@ -8,6 +8,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material'; 
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { FormsModule } from '@angular/forms'; 
 import 'hammerjs';
 
 // components
@@ -28,6 +29,7 @@ import { LeaderService } from './services/leader.service';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { LoginComponent } from './login/login.component';
 
 
 @NgModule({
@@ -39,16 +41,20 @@ import { LeaderService } from './services/leader.service';
     FooterComponent,
     AboutComponent,
     HomeComponent,
-    ContactComponent
+    ContactComponent,
+    //entryComponents: [LoginComponent],
+    LoginComponent
   ],
     imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule 
   ],
   providers: [DishService, PromotionService,LeaderService],
+  entryComponents:[LoginComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
