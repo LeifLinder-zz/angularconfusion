@@ -9,6 +9,7 @@ import { MaterialModule } from '@angular/material';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 import { FormsModule } from '@angular/forms'; 
+import { ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
 
 // components
@@ -22,10 +23,7 @@ import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 
 // services
-/*
-import { DishService } from './services/dish.service';
-import { LeaderService } from './services/leader.service';
-*/
+
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
@@ -42,7 +40,6 @@ import { LoginComponent } from './login/login.component';
     AboutComponent,
     HomeComponent,
     ContactComponent,
-    //entryComponents: [LoginComponent],
     LoginComponent
   ],
     imports: [
@@ -51,7 +48,8 @@ import { LoginComponent } from './login/login.component';
     MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
-    FormsModule 
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [DishService, PromotionService,LeaderService],
   entryComponents:[LoginComponent],
