@@ -54,7 +54,7 @@
       </div>
 
 
-        <div fxFlex>
+        <div *ngIf="leaders" fxFlex>
           <h2>Corporate Leadership</h2>
            <md-list  dense *ngFor="let leader of leaders">
             <md-list-item>
@@ -65,4 +65,8 @@
             </md-list>
 
        </div>
+       <div [hidden]="leaders">
+        <md-spinner></md-spinner><h4>Loading . . . Please Wait</h4>
+      </div>
+
 </div>
