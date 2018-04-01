@@ -1,49 +1,56 @@
 
 <div class="container"
-    fxLayout="row"
-    fxLayout.sm="column"
-    fxLayout.xs="column"
-    fxLayoutAlign.gt-md="space-around center"
-    fxLayoutGap="10px"
-    fxLayoutGap.xs="0">
+fxLayout="row"
+fxLayout.sm="column"
+fxLayout.xs="column"
+fxLayoutAlign.gt-md="space-around center"
+fxLayoutGap="10px"
+fxLayoutGap.xs="0">
 
-  <div fxFlex="40">
-    <md-card *ngIf="dish">
-      <md-card-header>
-        <md-card-title>
-          <h3>{{dish.name | uppercase}}</h3>
-        </md-card-title>
-      </md-card-header>
-      <img md-card-image src={{dish.image}} alt={{dish.name}}>
-      <md-card-content>
-        <p>{{dish.description}}
-        </p>
-      </md-card-content>
-      <md-card-actions>
-        <button md-button>LIKE</button>
-        <button md-button>SHARE</button>
-      </md-card-actions>
-    </md-card>
-  </div>
+<div fxFlex="40" *ngIf="dish">
+<md-card>
+  <md-card-header>
+    <md-card-title>
+      <h3>{{dish.name | uppercase}}</h3>
+    </md-card-title>
+  </md-card-header>
+  <img md-card-image src={{dish.image}} alt={{dish.name}}>
+  <md-card-content>
+    <p>{{dish.description}}
+    </p>
+  </md-card-content>
+  <hr>
+  <p style="value:{{dish.id}}::after">Some value</p>
+  <hr>
+  <md-card-actions>
+    <button md-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
+    <button md-button (click)="goBack()">BACK</button>
+    <button md-button>LIKE</button>
+    <button md-button>SHARE</button>
+    <span class="flex-spacer"></span>
+    <button md-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
+  </md-card-actions>
+</md-card>
+</div>
 
 
-  <div fxFlex="40" *ngIf="dish">
-    <div *ngIf="dish">
-      <h3>Dish Comments</h3>
-    </div>
-    <br>
-       <md-list *ngFor="let comment of dish.comments">
-         <md-list-item>
-            {{comment.comment}}
-         </md-list-item>
-         <md-list-item>
-            {{comment.rating}} Stars
-         </md-list-item>
-         <md-list-item>
-            --{{comment.author}} {{comment.date | date:mm}}
-         </md-list-item>
-        </md-list>
-      <br>  
-  </div>
+<div fxFlex="40" *ngIf="dish">
+<div>
+  <h3>Dish Comments</h3>
+</div>
+<br>
+   <md-list *ngFor="let comment of dish.comments">
+     <md-list-item>
+        {{comment.comment}}
+     </md-list-item>
+     <md-list-item>
+        {{comment.rating}} Stars
+     </md-list-item>
+     <md-list-item>
+        --{{comment.author}} {{comment.date | date:mm}}
+     </md-list-item>
+    </md-list>
+  <br>  
+</div>
 
 </div>
