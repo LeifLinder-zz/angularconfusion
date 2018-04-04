@@ -32,11 +32,11 @@ export class DishdetailComponent implements OnInit {
   selectedDish: Dish;
   @Input() dish: Dish;
 
+
   formErrors = {
     'rating': '',
     'comment': '',
-    'author': '',
-    'date': ''
+    'author': ''
   };
   /*
     rating: number;
@@ -47,7 +47,6 @@ export class DishdetailComponent implements OnInit {
 
   validationMessages = {
     'rating': {
-      'required':      'Rating is required.',
     },
     'comment': {
       'required':      'Comment is required.',
@@ -80,6 +79,7 @@ export class DishdetailComponent implements OnInit {
       this.commentForm = this.fb.group({
         author: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
         comment: ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
+        rating: [],
       });
 
       this.commentForm.valueChanges
@@ -88,12 +88,10 @@ export class DishdetailComponent implements OnInit {
     }
 
 
-
-
   setPrevNext(dishId: number) {
     let index = this.dishIds.indexOf(dishId);
-    this.prev = this.dishIds[(this.dishIds.length + index - 1)%this.dishIds.length];
-    this.next = this.dishIds[(this.dishIds.length + index + 1)%this.dishIds.length];
+    this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
+    this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
   }
 
     onSelect(dish: Dish) {
@@ -105,9 +103,11 @@ export class DishdetailComponent implements OnInit {
 
 
   onValueChanged(data?: any) {
-    if (!this.commentForm) { return; }
+    if (!this.commentForm) {
+      return;
+     }
     const form = this.commentForm;
-    for (const field in this.formErrors) {
+    for(const field in this.formErrors) {
       // clear previous error message (if any)
       this.formErrors[field] = '';
       const control = form.get(field);
@@ -122,13 +122,18 @@ export class DishdetailComponent implements OnInit {
 
   onSubmit() {
     this.comment = this.commentForm.value;
+    // create a date and add it to comment object
+    const date = new Date();
+    const datestring = date.toISOString();
+    this.comment.date = datestring;
+    // push the comment object 
     this.dish.comments.push(this.comment);
     console.log(this.comment);
     this.commentForm.reset({
-      rating: '',
+      rating: 5,
       comment: '',
       author: '',
-      date: ''
+      date: new Date()
     });
   }
 }

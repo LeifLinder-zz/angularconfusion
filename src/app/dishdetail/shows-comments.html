@@ -1,0 +1,89 @@
+
+<div class="container, mat-app-background"
+    fxLayout="row"
+    fxLayout.sm="column"
+    fxLayout.xs="column"
+    fxLayoutAlign.gt-md="space-around center"
+    fxLayoutGap="10px"
+    fxLayoutGap.xs="0">
+    
+    <div fxFlex="40" *ngIf="dish" style="border:red 1px solid">
+    <md-card>
+      <md-card-header>
+        <md-card-title>
+          <h3>{{dish.name | uppercase}}</h3>
+        </md-card-title>
+      </md-card-header>
+      <img md-card-image src={{dish.image}} alt={{dish.name}}>
+      <md-card-content>
+        <p>{{dish.description}}
+        </p>
+      </md-card-content>
+      <md-card-actions>
+        <button md-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
+        <button md-button (click)="goBack()">BACK</button>
+        <button md-button>LIKE</button>
+        <button md-button>SHARE</button>
+        <span class="flex-spacer"></span>
+        <button md-button [routerLink]="['/dishdetail', next]"><span class="fa fa-chevron-right fa-lg"></span></button>
+      </md-card-actions>
+    </md-card>
+    </div>
+    
+    
+    <div fxFlex="40" *ngIf="dish">
+    <div>
+      <h3>Dish Comments</h3>
+    </div>
+    <br>
+       <md-list *ngFor="let comment of dish.comments">
+         <md-list-item>
+            {{comment.comment}}
+         </md-list-item>
+         <md-list-item>
+            {{comment.rating}} Stars
+         </md-list-item>
+         <md-list-item>
+            --{{comment.author}} {{comment.date | date:mm}}
+         </md-list-item>
+        </md-list>
+      <br>  
+      <div style="border:green 1px solid">
+          <h3>Send us your Comments</h3>
+          <p>{{comment.author}}</p>
+          <p>{{comment.comment}}</p>
+          <hr/>
+          <!--  author, rating, comment -->
+          <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
+          <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+           <p>Name</p>
+              <!-- author -->
+              <md-input-container class="full-width"
+                dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
+                  <input mdInput formControlName="author" placeholder="Author" type="text" required>
+                  <md-hint>
+                    <span [hidden]="!(formErrors.author)">
+                      {{formErrors.author}}</span>
+                  </md-hint>
+              </md-input-container>
+              <p>Comment</p>
+              <!-- comment -->
+              <md-input-container class="full-width"
+              dividerColor="{{(formErrors.comment) ? 'warn' : 'primary'}}">
+               <input mdInput formControlName="comment" placeholder="Comment" type="text" required>
+               <md-hint>
+                 <span [hidden]="!(formErrors.comment)">
+                   {{formErrors.comment}}</span>
+               </md-hint>
+             </md-input-container>
+             <p style="width:100%">
+                <md-slider formControlName="rating" tickInterval="1" thumbLabel min="1" max="5" step="1" value="4"></md-slider>
+             </p>
+             <p style="width:100%">
+            <button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+            </p>
+            </form>
+        </div>
+    </div>
+    </div>
+    

@@ -1,5 +1,5 @@
 
-<div class="container mat-app-background"
+<div class="container, mat-app-background"
 fxLayout="row"
 fxLayout.sm="column"
 fxLayout.xs="column"
@@ -7,7 +7,7 @@ fxLayoutAlign.gt-md="space-around center"
 fxLayoutGap="10px"
 fxLayoutGap.xs="0">
 
-<div fxFlex="40" *ngIf="dish">
+<div fxFlex="40" *ngIf="dish" style="border:red 1px solid">
 <md-card>
   <md-card-header>
     <md-card-title>
@@ -36,7 +36,7 @@ fxLayoutGap.xs="0">
   <h3>Dish Comments</h3>
 </div>
 <br>
-   <md-list *ngFor="let comment of dish.comments">
+   <md-list *ngFor="let comment of  ">
      <md-list-item>
         {{comment.comment}}
      </md-list-item>
@@ -46,31 +46,13 @@ fxLayoutGap.xs="0">
      <md-list-item>
         --{{comment.author}} {{comment.date | date:mm}}
      </md-list-item>
-  </md-list>
-
-  <!-- this shows current form values in format of comments -->
-
-  <md-list *ngIf="commentForm.valid">
-      <md-list-item>
-         {{commentForm.value.comment}}
-      </md-list-item>
-      <md-list-item>
-         {{commentForm.value.rating}} Stars
-      </md-list-item>
-      <md-list-item >
-         --{{commentForm.value.author}}
-      </md-list-item>
-   </md-list>
-
-
-
+    </md-list>
   <br>  
-  <div>
+  <div style="border:green 1px solid">
       <h3>Send us your Comments</h3>
 
-    <!-- // uncomment to show all the form values 
+      <!--  author, rating, comment -->
       <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
-    -->
       <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
        <p>Name</p>
           <!-- author -->
@@ -93,7 +75,7 @@ fxLayoutGap.xs="0">
            </md-hint>
          </md-input-container>
          <p style="width:100%">
-          <md-slider formControlName="rating" tickInterval="1" thumbLabel min="1" max="5" step="1" value="5"></md-slider>
+          <md-slider style="background-color:red;"formControlName="rating" tickInterval="1" thumbLabel min="1" max="5" step="1" value="4"></md-slider>
          </p>
         <button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
         </form>
