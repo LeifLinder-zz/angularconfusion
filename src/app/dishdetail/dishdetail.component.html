@@ -7,7 +7,7 @@ fxLayoutAlign.gt-md="space-around center"
 fxLayoutGap="10px"
 fxLayoutGap.xs="0">
 
-<div fxFlex="40" *ngIf="dish">
+<div fxFlex="40" *ngIf="dish" style="border:red 1px solid">
 <md-card>
   <md-card-header>
     <md-card-title>
@@ -19,9 +19,6 @@ fxLayoutGap.xs="0">
     <p>{{dish.description}}
     </p>
   </md-card-content>
-  <hr>
-  <p style="value:{{dish.id}}::after">Some value</p>
-  <hr>
   <md-card-actions>
     <button md-button [routerLink]="['/dishdetail', prev]"><span class="fa fa-chevron-left fa-lg"></span></button>
     <button md-button (click)="goBack()">BACK</button>
@@ -51,6 +48,36 @@ fxLayoutGap.xs="0">
      </md-list-item>
     </md-list>
   <br>  
+  <div style="border:green 1px solid">
+      <h3>Send us your Comments</h3>
+      <p>{{comment.author}}</p>
+      <p>{{comment.comment}}</p>
+      <hr/>
+      <!--  author, rating, comment -->
+      <p>{{ commentForm.value | json }} {{ commentForm.status | json }}</p>
+      <form novalidate [formGroup]="commentForm" (ngSubmit)="onSubmit()">
+       <p>Name</p>
+          <!-- author -->
+          <md-input-container class="full-width"
+            dividerColor="{{(formErrors.author) ? 'warn' : 'primary'}}">
+              <input mdInput formControlName="author" placeholder="Author" type="text" required>
+              <md-hint>
+                <span [hidden]="!(formErrors.author)">
+                  {{formErrors.author}}</span>
+              </md-hint>
+          </md-input-container>
+          <p>Comment</p>
+          <!-- comment -->
+          <md-input-container class="full-width"
+          dividerColor="{{(formErrors.comment) ? 'warn' : 'primary'}}">
+           <input mdInput formControlName="comment" placeholder="Comment" type="text" required>
+           <md-hint>
+             <span [hidden]="!(formErrors.comment)">
+               {{formErrors.comment}}</span>
+           </md-hint>
+         </md-input-container>
+        <button type="submit" md-button class="background-primary text-floral-white" [disabled]="commentForm.invalid">Submit</button>
+        </form>
+    </div>
 </div>
-
 </div>
