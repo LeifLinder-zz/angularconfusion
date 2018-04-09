@@ -1,5 +1,5 @@
-
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
+/*import { Component, OnInit, Input } from '@angular/core';*/
 import { Observable } from 'rxjs/Observable';
 import {Params, ActivatedRoute} from '@angular/router';
 import { Location } from '@angular/common';
@@ -29,7 +29,7 @@ export class DishdetailComponent implements OnInit {
   dishIds: number[];
   prev: number;
   next: number;
-  selectedDish: Dish;
+ /* selectedDish: Dish; */
   @Input() dish: Dish;
 
 
@@ -59,12 +59,14 @@ export class DishdetailComponent implements OnInit {
       'maxlength':     'Author cannot be more than 25 characters long.'
     }
   };
-
+  /* constructor(private dishService: DishService,
+    @Inject('BaseURL') private BaseURL) { } */
   constructor(
     private dishservice: DishService,
     private route: ActivatedRoute,
     private location: Location,
-    private fb: FormBuilder) {
+    private fb: FormBuilder,
+    @Inject('BaseURL') private BaseURL) {
        this.createForm();
     }
 
@@ -93,10 +95,11 @@ export class DishdetailComponent implements OnInit {
     this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
     this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
   }
-
+/*
     onSelect(dish: Dish) {
       this.selectedDish = dish;
     }
+*/
     goBack(): void {
       this.location.back();
     }

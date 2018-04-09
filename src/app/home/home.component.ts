@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-
+// import { Component, OnInit } from '@angular/core'; 
+import { Component, OnInit, Inject } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { DishService } from '../services/dish.service';
 import { Promotion } from '../shared/promotion';
@@ -7,7 +7,7 @@ import { PromotionService } from '../services/promotion.service';
 import { Leader} from '../shared/leader';
 import { LeaderService } from '../services/leader.service';
 import { Observable } from 'rxjs/Observable';
-//import 'rxjs/add/operator/toPromise';
+// import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
 
@@ -20,24 +20,27 @@ export class HomeComponent implements OnInit {
 
 dish: Dish;
 promotion: Promotion;
-leader:Leader
+leader: Leader;
 
 constructor(private dishservice: DishService,
-private promotionservice: PromotionService,private leaderservice: LeaderService) { }
+private promotionservice: PromotionService, 
+private leaderservice: LeaderService,
+@Inject('BaseURL') private BaseURL) { }
+
 
 ngOnInit() {
-//this.dish = this.dishservice.getFeaturedDish();
-//this.dishservice.getFeaturedDish().then(dish => this.dish = dish);
+// this.dish = this.dishservice.getFeaturedDish();
+// this.dishservice.getFeaturedDish().then(dish => this.dish = dish);
 this.dishservice.getFeaturedDish().subscribe(dish => this.dish = dish);
 
-//this.promotion = this.promotionservice.getFeaturedPromotion();
+// this.promotion = this.promotionservice.getFeaturedPromotion();
 this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion);
-//this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion);
+// this.promotionservice.getFeaturedPromotion().subscribe(promotion => this.promotion = promotion);
 
 
-//this.leader = this.leaderservice.getFeaturedLeader();
+// this.leader = this.leaderservice.getFeaturedLeader();
 this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader);
-//this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader);
+// this.leaderservice.getFeaturedLeader().subscribe(leader => this.leader = leader);
 
 }
 
