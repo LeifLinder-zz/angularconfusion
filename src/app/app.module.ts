@@ -1,4 +1,4 @@
-// LEIF LINDER 2018-02-23
+// LEIF LINDER 2018-04-10
 // OSLO, NORWAY
 
 // modules
@@ -24,6 +24,7 @@ import { AboutComponent } from './about/about.component';
 import { HomeComponent } from './home/home.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
+import { RestangularModule, Restangular } from 'ngx-restangular';
 
 // services
 import { DishService } from './services/dish.service';
@@ -33,6 +34,7 @@ import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 // shared
 import { baseURL } from './shared/baseurl';
+import { RestangularConfigFactory } from './shared/restConfig';
 
 
 @NgModule({
@@ -55,7 +57,8 @@ import { baseURL } from './shared/baseurl';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    RestangularModule.forRoot(RestangularConfigFactory)
   ],
   providers: [
     DishService,
