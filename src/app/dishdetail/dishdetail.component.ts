@@ -9,10 +9,9 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DISHES } from '../shared/dishes';
 import { Comment } from '../shared/comment';
 import 'rxjs/add/operator/toPromise';
-import 'rxjs/add/operator/switchmap';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
-
+import 'rxjs/add/operator/switchMap';
 
 
 
@@ -23,20 +22,25 @@ import 'rxjs/add/observable/of';
 })
 
 export class DishdetailComponent implements OnInit {
-  errMess: string;
-  commentForm: FormGroup;
-  comment: Comment;
+
+ // dish: Dish;
+  dishcopy = null;
   dishIds: number[];
   prev: number;
   next: number;
- /* selectedDish: Dish; */
+  comment: Comment;
+  errMess: string;
+
+  // not sure why Joe does not have commentForm variable
+  // on video
+  commentForm: FormGroup;
+  selectedDish: Dish;
+  // dish: Dish;
   @Input() dish: Dish;
 
-
   formErrors = {
-    'rating': '',
-    'comment': '',
-    'author': ''
+    'author': '',
+    'comment': ''
   };
   /*
     rating: number;
@@ -83,9 +87,17 @@ export class DishdetailComponent implements OnInit {
           errmess => this.errMess = <any>errmess);
 */
 this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds, errmess => this.errMess = <any>errmess);
+
+/*
 this.route.params.switchMap((params: Params) => this.dishservice.getDish(+params['id']))
-.subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id); });
-    }
+.subscribe(dish => { this.dish = dish; this.dishcopy = dish;this.setPrevNext(dish.id); });
+*/
+
+      this.route.params
+      .switchMap((params: Params) => this.dishservice.getDish(+params['id']))
+      .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id); },
+          errmess => { this.dish = null; this.errMess = <any>errmess; });
+        }
 
     createForm(): void {
       this.commentForm = this.fb.group({
@@ -105,11 +117,11 @@ this.route.params.switchMap((params: Params) => this.dishservice.getDish(+params
     this.prev = this.dishIds[(this.dishIds.length + index - 1) % this.dishIds.length];
     this.next = this.dishIds[(this.dishIds.length + index + 1) % this.dishIds.length];
   }
-/*
+
     onSelect(dish: Dish) {
       this.selectedDish = dish;
     }
-*/
+
     goBack(): void {
       this.location.back();
     }
@@ -135,18 +147,15 @@ this.route.params.switchMap((params: Params) => this.dishservice.getDish(+params
 
   onSubmit() {
     this.comment = this.commentForm.value;
-    // create a date and add it to comment object
-    const date = new Date();
-    const datestring = date.toISOString();
-    this.comment.date = datestring;
-    // push the comment object 
-    this.dish.comments.push(this.comment);
+    this.comment.date = new Date().toISOString();
     console.log(this.comment);
+  //  this.dishcopy.comments.push(this.comment);
+    this.dish.comments.push(this.comment);
+   // this.dishcopy.save().subscribe(dish => this.dish = dish);
     this.commentForm.reset({
-      rating: 5,
-      comment: '',
       author: '',
-      date: new Date()
+      rating: 5,
+      comment: ''
     });
   }
 }
