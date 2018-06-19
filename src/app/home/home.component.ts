@@ -10,11 +10,20 @@ import { Observable } from 'rxjs/Observable';
 // import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/of';
+import { flyInOut, expand} from '../animations/app.animation';
 
 @Component({
 selector: 'app-home',
 templateUrl: './home.component.html',
-styleUrls: ['./home.component.scss']
+styleUrls: ['./home.component.scss'],
+host: {
+    '[@flyInOut]': 'true',
+    'style': 'display: block;'
+    },
+    animations: [
+      flyInOut(),
+      expand()
+    ]
 })
 export class HomeComponent implements OnInit {
 
