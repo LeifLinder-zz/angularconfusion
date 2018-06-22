@@ -71,7 +71,7 @@ export class DishdetailComponent implements OnInit {
     @Inject('BaseURL') private BaseURL) {
     }
 
-  
+
     ngOnInit() {
 
       this.createForm();
@@ -141,3 +141,4 @@ export class DishdetailComponent implements OnInit {
         }
       }
     }
+  }

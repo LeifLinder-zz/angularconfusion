@@ -30,6 +30,7 @@ import { RestangularModule, Restangular } from 'ngx-restangular';
 import { DishService } from './services/dish.service';
 import { PromotionService } from './services/promotion.service';
 import { LeaderService } from './services/leader.service';
+import { FeedbackService } from './services/feedback.service';
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service';
 
 // shared
@@ -67,7 +68,8 @@ import { HighlightDirective } from './directives/highlight.directive';
     PromotionService,
     LeaderService,
     {provide: 'BaseURL', useValue: baseURL},
-    ProcessHTTPMsgService
+    ProcessHTTPMsgService,
+    FeedbackService
   ],
   entryComponents: [
     LoginComponent
